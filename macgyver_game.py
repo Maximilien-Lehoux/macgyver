@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+import random
 
 pygame.init()
 
@@ -18,9 +19,9 @@ maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
         [40, 140], [60, 140], [80, 140], [100, 140], [140, 140], [160, 140], [200, 140], [220, 140], [260, 140],
         [280, 140]]
 
-# needle_location = []
-
-
+needle_location = [(0, 140), (280, 100), (280, 40)]
+ether_location = [(200, 120), (100, 120), (60, 120)]
+plastic_tube_location = [(140, 60), (120, 20), (240, 40)]
 
 lost = False
 
@@ -61,15 +62,15 @@ window.blit(character_guardian, character_guardian_rect)
 
 # Create rectangles objects
 object_needle_rect = object_needle.get_rect()
-object_needle_rect.topleft = (100, 0)
+object_needle_rect.topleft = random.choice(needle_location)
 window.blit(object_needle, object_needle_rect)
 
 object_ether_rect = object_ether.get_rect()
-object_ether_rect.topleft = (100, 60)
+object_ether_rect.topleft = random.choice(ether_location)
 window.blit(object_ether, object_ether_rect)
 
 object_plastic_tube_rect = object_plastic_tube.get_rect()
-object_plastic_tube_rect.topleft = (100, 80)
+object_plastic_tube_rect.topleft = random.choice(plastic_tube_location)
 window.blit(object_plastic_tube, object_plastic_tube_rect)
 
 
