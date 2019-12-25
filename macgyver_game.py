@@ -59,7 +59,6 @@ character_guardian_rect = character_guardian.get_rect()
 character_guardian_rect.topleft = (260, 0)
 window.blit(character_guardian, character_guardian_rect)
 
-
 # Create rectangles objects
 object_needle_rect = object_needle.get_rect()
 object_needle_rect.topleft = random.choice(needle_location)
@@ -76,9 +75,28 @@ window.blit(object_plastic_tube, object_plastic_tube_rect)
 
 while not lost:
 
+    # pygame.time.Clock().tick(30)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             lost = True
+
+        elif event.type == KEYDOWN:
+            if event.key == K_DOWN:  # Si "flèche bas"
+                character_macgyver_rect = character_macgyver_rect.move(0, 20)  # On descend le perso
+            if event.key == K_RIGHT:
+                character_macgyver_rect = character_macgyver_rect.move(20, 0)
+            if event.key == K_LEFT:
+                character_macgyver_rect = character_macgyver_rect.move(-20, 0)
+            if event.key == K_UP:
+                character_macgyver_rect = character_macgyver_rect.move(0, -20)
+
+    window.blit(background, (0, 0))
+    window.blit(character_guardian, character_guardian_rect)
+    window.blit(object_needle, object_needle_rect)
+    window.blit(object_ether, object_ether_rect)
+    window.blit(object_plastic_tube, object_plastic_tube_rect)
+    window.blit(character_macgyver, character_macgyver_rect)
 
     pygame.display.flip()
 
