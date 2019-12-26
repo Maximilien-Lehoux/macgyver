@@ -5,7 +5,7 @@ import fonctions
 
 pygame.init()
 
-window_height = 160
+window_height = 205
 window_width = 300
 
 maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
@@ -36,6 +36,12 @@ window = pygame.display.set_mode(window_size)
 # Stick maze
 background = pygame.image.load("pictures/structures.png").convert_alpha()
 window.blit(background, (0, 0))
+
+# Stick background rules games
+background_rules = pygame.Surface(window.get_size())
+background_rules = background_rules.convert()
+background_rules.fill(pygame.Color("#575757"))
+window.blit(background_rules, (0, 165))
 
 # create characters
 character_macgyver = pygame.image.load("pictures/MacGyver.png").convert_alpha()
@@ -79,7 +85,6 @@ window.blit(object_plastic_tube, object_plastic_tube_rect)
 macgyver_location_maze = [0, 0]
 face_guardian = [260, 20]
 
-
 while not lost:
     pygame.time.Clock().tick(30)
 
@@ -91,7 +96,7 @@ while not lost:
             lost = True
 
         elif event.type == KEYDOWN:  # and character_macgyver_rect[:2] not in maze:
-            if event.key == K_DOWN and character_macgyver_rect[1] != window_height - 20:
+            if event.key == K_DOWN and character_macgyver_rect[1] != 160 - 20:
                 macgyver_location_maze[0] = character_macgyver_rect[0]
                 macgyver_location_maze[1] = character_macgyver_rect[1] + 20
                 if macgyver_location_maze not in maze:
