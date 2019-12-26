@@ -14,16 +14,18 @@ maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
         [20, 60], [80, 60], [160, 60], [180, 60], [200, 60], [220, 60], [280, 60],
         [20, 80], [40, 80], [60, 80], [80, 80],
 
-        [60, 120], [80, 120], [120, 120], [140, 120], [160, 120], [180, 120], [220, 120], [240, 120], [260, 120],
+        [80, 120], [120, 120], [140, 120], [160, 120], [180, 120], [220, 120], [240, 120], [260, 120],
         [280, 120],
 
         [40, 140], [60, 140], [80, 140], [100, 140], [140, 140], [160, 140], [200, 140], [220, 140], [260, 140],
         [280, 140]]
 
 
-needle_location = [(0, 140), (280, 100), (280, 40)]
-ether_location = [(200, 120), (100, 120), (60, 120)]
-plastic_tube_location = [(140, 60), (120, 20), (240, 40)]
+needle_location = [[0, 140], [280, 100], [280, 40]]
+ether_location = [[200, 120], [100, 120], [60, 120]]
+plastic_tube_location = [[140, 60], [120, 20], [240, 40]]
+
+objects_numbers = 0
 
 lost = False
 
@@ -74,12 +76,15 @@ object_plastic_tube_rect = object_plastic_tube.get_rect()
 object_plastic_tube_rect.topleft = random.choice(plastic_tube_location)
 window.blit(object_plastic_tube, object_plastic_tube_rect)
 
-macgyver_location_maze = [0, 20]
+macgyver_location_maze = [0, 0]
+face_guardian = [260, 20]
 
 
 while not lost:
+    pygame.time.Clock().tick(30)
 
-    # pygame.time.Clock().tick(30)
+    if character_macgyver_rect[:2] == face_guardian and objects_numbers != 3:
+        lost = True
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -119,6 +124,6 @@ while not lost:
 
     pygame.display.flip()
 
-print(macgyver_location_maze)
-print(character_macgyver_rect)
+
+
 pygame.display.quit()
