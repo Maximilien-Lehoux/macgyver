@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-from fonctions import *
+import fonctions
 
 pygame.init()
 
@@ -19,6 +19,7 @@ maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
 
         [40, 140], [60, 140], [80, 140], [100, 140], [140, 140], [160, 140], [200, 140], [220, 140], [260, 140],
         [280, 140]]
+
 
 needle_location = [(0, 140), (280, 100), (280, 40)]
 ether_location = [(200, 120), (100, 120), (60, 120)]
@@ -55,7 +56,6 @@ object_plastic_tube = pygame.transform.scale(object_plastic_tube, (20, 20))
 character_macgyver_rect = character_macgyver.get_rect()
 character_macgyver_rect.topleft = (0, 0)
 window.blit(character_macgyver, character_macgyver_rect)
-print(character_macgyver_rect[:2])
 
 character_guardian_rect = character_guardian.get_rect()
 character_guardian_rect.topleft = (260, 0)
@@ -74,6 +74,9 @@ object_plastic_tube_rect = object_plastic_tube.get_rect()
 object_plastic_tube_rect.topleft = random.choice(plastic_tube_location)
 window.blit(object_plastic_tube, object_plastic_tube_rect)
 
+macgyver_location_maze = [0, 20]
+
+
 while not lost:
 
     # pygame.time.Clock().tick(30)
@@ -82,15 +85,30 @@ while not lost:
         if event.type == QUIT:
             lost = True
 
-        elif event.type == KEYDOWN:
+        elif event.type == KEYDOWN:  # and character_macgyver_rect[:2] not in maze:
             if event.key == K_DOWN and character_macgyver_rect[1] != window_height - 20:
-                character_macgyver_rect = character_macgyver_rect.move(0, 20)
+                macgyver_location_maze[0] = character_macgyver_rect[0]
+                macgyver_location_maze[1] = character_macgyver_rect[1] + 20
+                if macgyver_location_maze not in maze:
+                    character_macgyver_rect = character_macgyver_rect.move(0, 20)
+
             if event.key == K_RIGHT and character_macgyver_rect[0] != window_width - 20:
-                character_macgyver_rect = character_macgyver_rect.move(20, 0)
+                macgyver_location_maze[0] = character_macgyver_rect[0] + 20
+                macgyver_location_maze[1] = character_macgyver_rect[1]
+                if macgyver_location_maze not in maze:
+                    character_macgyver_rect = character_macgyver_rect.move(20, 0)
+
             if event.key == K_LEFT and character_macgyver_rect[0] != 0:
-                character_macgyver_rect = character_macgyver_rect.move(-20, 0)
+                macgyver_location_maze[0] = character_macgyver_rect[0] - 20
+                macgyver_location_maze[1] = character_macgyver_rect[1]
+                if macgyver_location_maze not in maze:
+                    character_macgyver_rect = character_macgyver_rect.move(-20, 0)
+
             if event.key == K_UP and character_macgyver_rect[1] != 0:
-                character_macgyver_rect = character_macgyver_rect.move(0, -20)
+                macgyver_location_maze[0] = character_macgyver_rect[0]
+                macgyver_location_maze[1] = character_macgyver_rect[1] - 20
+                if macgyver_location_maze not in maze:
+                    character_macgyver_rect = character_macgyver_rect.move(0, -20)
 
     window.blit(background, (0, 0))
     window.blit(character_guardian, character_guardian_rect)
@@ -101,4 +119,6 @@ while not lost:
 
     pygame.display.flip()
 
+print(macgyver_location_maze)
+print(character_macgyver_rect)
 pygame.display.quit()
