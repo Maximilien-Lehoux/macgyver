@@ -24,6 +24,7 @@ maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
 needle_location = [[0, 140], [280, 100], [280, 40]]
 ether_location = [[200, 120], [100, 120], [40, 120]]
 plastic_tube_location = [[140, 60], [120, 20], [240, 40]]
+syringe_location = []
 
 objects_numbers = 0
 
@@ -43,47 +44,59 @@ background_rules = background_rules.convert()
 background_rules.fill(pygame.Color("#EE3131"))
 window.blit(background_rules, (0, 165))
 
-# create characters
+# create characters and rectangles
 character_macgyver = pygame.image.load("pictures/MacGyver.png").convert_alpha()
 character_macgyver = pygame.transform.scale(character_macgyver, (20, 20))
-
-character_guardian = pygame.image.load("pictures/Gardien.png").convert_alpha()
-character_guardian = pygame.transform.scale(character_guardian, (20, 20))
-
-# create objects
-object_needle = pygame.image.load("pictures/aiguille.png").convert_alpha()
-object_needle = pygame.transform.scale(object_needle, (20, 20))
-
-object_ether = pygame.image.load("pictures/ether.png").convert_alpha()
-object_ether = pygame.transform.scale(object_ether, (20, 20))
-
-object_plastic_tube = pygame.image.load("pictures/tube_plastique.png").convert_alpha()
-object_plastic_tube = pygame.transform.scale(object_plastic_tube, (20, 20))
-
-# Create rectangles characters
 character_macgyver_rect = character_macgyver.get_rect()
 character_macgyver_rect.topleft = [0, 0]
 window.blit(character_macgyver, character_macgyver_rect)
 
+character_guardian = pygame.image.load("pictures/Gardien.png").convert_alpha()
+character_guardian = pygame.transform.scale(character_guardian, (20, 20))
 character_guardian_rect = character_guardian.get_rect()
 character_guardian_rect.topleft = [260, 0]
 window.blit(character_guardian, character_guardian_rect)
 
-# Create rectangles objects
+# create objects and rectangles
+object_needle = pygame.image.load("pictures/aiguille.png").convert_alpha()
+object_needle = pygame.transform.scale(object_needle, (20, 20))
 object_needle_rect = object_needle.get_rect()
 object_needle_rect.topleft = random.choice(needle_location)
 window.blit(object_needle, object_needle_rect)
 
+object_ether = pygame.image.load("pictures/ether.png").convert_alpha()
+object_ether = pygame.transform.scale(object_ether, (20, 20))
 object_ether_rect = object_ether.get_rect()
 object_ether_rect.topleft = random.choice(ether_location)
 window.blit(object_ether, object_ether_rect)
 
+object_plastic_tube = pygame.image.load("pictures/tube_plastique.png").convert_alpha()
+object_plastic_tube = pygame.transform.scale(object_plastic_tube, (20, 20))
 object_plastic_tube_rect = object_plastic_tube.get_rect()
 object_plastic_tube_rect.topleft = random.choice(plastic_tube_location)
 window.blit(object_plastic_tube, object_plastic_tube_rect)
 
+object_syringe = pygame.image.load("pictures/seringue.png").convert_alpha()
+object_syringe = pygame.transform.scale(object_syringe, (20, 20))
+object_syringe_rect = object_syringe.get_rect()
+object_syringe_rect.topleft = [140, 175]
+
 macgyver_location_maze = [0, 0]
 face_guardian = [260, 20]
+
+# Screen window_end
+rect_window_end = window.get_rect()
+police_game_end = pygame.font.Font(None, 72)
+
+# Window game_over
+text_game_over = police_game_end.render("Game Over", True, pygame.Color("#FFFF00"))
+square_text_game_over = text_game_over.get_rect()
+square_text_game_over.center = rect_window_end.center
+
+# Window game_win
+text_game_win = police_game_end.render("YOU WIN !!!", True, pygame.Color("#FFFF00"))
+square_text_game_win = text_game_win.get_rect()
+square_text_game_win.center = rect_window_end.center
 
 while not lost:
     pygame.time.Clock().tick(30)
@@ -117,9 +130,6 @@ while not lost:
                 if macgyver_location_maze not in maze:
                     character_macgyver_rect = character_macgyver_rect.move(0, -20)
 
-    if character_macgyver_rect[:2] == face_guardian and objects_numbers != 3:
-        lost = True
-
     if character_macgyver_rect == object_ether_rect:
         object_ether_rect = [40, 175]
         objects_numbers += 1
@@ -131,14 +141,32 @@ while not lost:
     if character_macgyver_rect == object_plastic_tube_rect:
         object_plastic_tube_rect = [140, 175]
         objects_numbers += 1
-        
-    window.blit(background, (0, 0))
+
+    if objects_numbers != 3:
+        window.blit(background, (0, 0))
+        window.blit(object_needle, object_needle_rect)
+        window.blit(object_ether, object_ether_rect)
+        window.blit(object_plastic_tube, object_plastic_tube_rect)
+    else:
+        window.blit(background, (0, 0))
+        window.blit(background_rules, (0, 165))
+        window.blit(object_syringe, object_syringe_rect)
+
+    if character_macgyver_rect[:2] == face_guardian:
+        lost = True
+
     window.blit(character_guardian, character_guardian_rect)
-    window.blit(object_needle, object_needle_rect)
-    window.blit(object_ether, object_ether_rect)
-    window.blit(object_plastic_tube, object_plastic_tube_rect)
     window.blit(character_macgyver, character_macgyver_rect)
 
     pygame.display.flip()
 
+if objects_numbers == 3:
+    window.fill(pygame.Color("#EE3131"))
+    window.blit(text_game_win, square_text_game_win)
+else:
+    window.fill(pygame.Color("#EE3131"))
+    window.blit(text_game_over, square_text_game_over)
+    
+pygame.display.flip()
+pygame.time.delay(5000)
 pygame.display.quit()
