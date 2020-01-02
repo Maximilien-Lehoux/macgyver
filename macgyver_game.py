@@ -98,6 +98,12 @@ text_game_win = police_game_end.render("YOU WIN !!!", True, pygame.Color("#FFFF0
 square_text_game_win = text_game_win.get_rect()
 square_text_game_win.center = rect_window_end.center
 
+# POO
+class Movements:
+
+    def __init__(self, ):
+
+
 while not lost:
     pygame.time.Clock().tick(30)
 
