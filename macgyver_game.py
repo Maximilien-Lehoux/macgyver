@@ -1,7 +1,6 @@
 import pygame
 from pygame.locals import *
 import random
-import fonctions
 
 pygame.init()
 
