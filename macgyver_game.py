@@ -123,13 +123,9 @@ while not lost:
             lost = True
 
         elif event.type == KEYDOWN:  # and character_macgyver_rect[:2] not in maze:
-
             character_macgyver.movement_right(character_macgyver)
-
             character_macgyver.movement_left(character_macgyver)
-
             character_macgyver.movement_up(character_macgyver)
-
             character_macgyver.movement_down(character_macgyver)
 
     if character_macgyver.rectangle == object_ether.rectangle:
