@@ -43,7 +43,6 @@ macgyver_location_maze = [0, 0]
 gardian_location = [260, 0]
 face_guardian = [260, 20]
 
-
 finish = False
 
 window = pygame.display.set_mode(window_size)
@@ -85,21 +84,6 @@ class TextGame:
             window.blit(game_over.text, game_over.rectangle_text)
 
 
-# Stick maze
-background_maze = BackgroundPicture("pictures/structures.png", maze_location)
-window.blit(background_maze.background_picture, background_maze.location_background_picture)
-
-# Stick background rules games
-background_rules = BackgroundColor(background_rules_color, rules_location)
-
-# Window game_over
-game_over = TextGame(None, 72, "Game Over", "#FFFF00")
-
-# Window game_win
-game_win = TextGame(None, 72, "YOU WIN !!!", "#FFFF00")
-
-
-# class and method
 class Items:
     """Create game characters and objects"""
     def __init__(self, picture, item_location):
@@ -172,6 +156,19 @@ class Items:
             variable_loop = True
             return variable_loop
 
+
+# Stick maze
+background_maze = BackgroundPicture("pictures/structures.png", maze_location)
+window.blit(background_maze.background_picture, background_maze.location_background_picture)
+
+# Stick background rules games
+background_rules = BackgroundColor(background_rules_color, rules_location)
+
+# Window game_over
+game_over = TextGame(None, 72, "Game Over", "#FFFF00")
+
+# Window game_win
+game_win = TextGame(None, 72, "YOU WIN !!!", "#FFFF00")
 
 # Create characters and objects
 character_macgyver = Items("pictures/MacGyver.png", macgyver_location)
