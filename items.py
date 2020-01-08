@@ -1,7 +1,3 @@
-import random
-import pygame
-from pygame.locals import *
-
 from structure import *
 
 maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
