@@ -12,12 +12,10 @@ maze = [[140, 0], [160, 0], [180, 0], [200, 0], [220, 0], [240, 0], [280, 0],
         [40, 140], [60, 140], [80, 140], [100, 140], [140, 140], [160, 140], [200, 140], [220, 140], [260, 140],
         [280, 140]]
 
-
 maze_location = [0, 0]
 
 rules_location = [0, 165]
 background_rules_color = "#EE3131"
-
 
 needle_location = random.choice([[0, 140], [280, 100], [280, 40]])
 ether_location = random.choice([[200, 120], [100, 120], [40, 120]])
@@ -76,17 +74,11 @@ class Items:
             if macgyver_location_maze not in maze:
                 character.rectangle = character.rectangle.move(0, 20)
 
-    def random_position_object(self):
-        location_object = [random.randint(0, (window_width - 20) / 10) * 10,
-                           random.randint(0, (window_height - 20) / 10) * 10]
-        return location_object
-
     def catch_object(self, character, object, location_score):
         """the character catches objects"""
         if character.rectangle == object.rectangle:
             object.rectangle = location_score
             character.objects_number += 1
-
 
     def finish_game(self, character):
         """the game ends when the character is in front of the goalkeeper"""

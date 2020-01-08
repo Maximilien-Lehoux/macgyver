@@ -1,2 +1,2 @@
-# macgyver
-video games with pygame
+pygame
+random
