@@ -1,5 +1,5 @@
 from structure import *
-from constant import *
+from items import *
 
 pygame.init()
 
