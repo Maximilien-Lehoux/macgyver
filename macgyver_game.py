@@ -8,8 +8,8 @@ if __name__ == "__main__":
     finish = False
 
     # Stick maze
-    background_maze = BackgroundPicture("pictures/structures.png", maze_location)
-    window.blit(background_maze.background_picture, background_maze.location_background_picture)
+    # background_maze = BackgroundPicture("pictures/structures.png", maze_location)
+    # window.blit(background_maze.background_picture, background_maze.location_background_picture)
 
     # Stick background rules games
     background_rules = BackgroundColor(background_rules_color, rules_location)
@@ -53,14 +53,16 @@ if __name__ == "__main__":
 
         # the character creates the syringe when he catches the objects and it is displayed
         if character_macgyver.objects_number != 3:
-            window.blit(background_maze.background_picture, (0, 0))
+            # window.blit(background_maze.background_picture, (0, 0))
+            window.fill(pygame.Color("#000000"))
             window.blit(object_needle.picture, object_needle.rectangle)
             window.blit(object_ether.picture, object_ether.rectangle)
             window.blit(object_plastic_tube.picture, object_plastic_tube.rectangle)
         else:
-            window.blit(background_maze.background_picture, (0, 0))
+            # window.blit(background_maze.background_picture, (0, 0))
+            window.fill(pygame.Color("#000000"))
             window.blit(background_rules.background_colorful, background_rules.location_background_colorful)
-            object_syringe.rectangle = [140, 175]
+            object_syringe.rectangle = [140, 315]
             window.blit(object_syringe.picture, object_syringe.rectangle)
 
         # the game ends
