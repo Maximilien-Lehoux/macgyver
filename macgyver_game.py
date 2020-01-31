@@ -7,9 +7,10 @@ if __name__ == "__main__":
 
     finish = False
 
-    # Stick background rules games
-    background_rules = BackgroundColor(background_rules_color, rules_location)
+    # background rules games and generate wall
+    background_rules = BackgroundColor(BACKGROUND_RULES_COLOR, rules_location)
     window.blit(background_rules.background_colorful, background_rules.location_background_colorful)
+    wall = BackgroundPicture("pictures/wall.png")
 
     # Generation of a level from a file
     level = Level("level")
@@ -68,13 +69,13 @@ if __name__ == "__main__":
         else:
             window.fill(pygame.Color("#000000"))
             window.blit(background_rules.background_colorful, background_rules.location_background_colorful)
-            object_syringe.rectangle = [140, 315]
+            object_syringe.rectangle = plastic_tube_location_score
             window.blit(object_syringe.picture, object_syringe.rectangle)
 
         # the game ends
         finish = character_macgyver.finish_game(character_macgyver, face_guardian)
 
-        level.display_decor(window, character_guardian)
+        level.display_decor(window, character_guardian, wall)
         window.blit(character_macgyver.picture, character_macgyver.rectangle)
 
         pygame.display.flip()

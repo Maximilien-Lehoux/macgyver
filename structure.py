@@ -3,14 +3,14 @@ from pygame.locals import *
 
 import random
 
-sprite_size = 20
+SPRITE_SIZE = 30
 
-window_height = (15 * sprite_size) + 45
-window_width = 15 * sprite_size
+window_height = (15 * SPRITE_SIZE) + SPRITE_SIZE * 2
+window_width = 15 * SPRITE_SIZE
 window_size = (window_width, window_height)
 
-rules_location = [0, (sprite_size * 15) + 5]
-background_rules_color = "#EE3131"
+rules_location = [0, (SPRITE_SIZE * 15) + 5]
+BACKGROUND_RULES_COLOR = "#EE3131"
 
 image_mur = "pictures/wall.png"
 
@@ -21,9 +21,9 @@ rectangle_window = window.get_rect()
 
 class BackgroundPicture:
     """create background from saved image"""
-    def __init__(self, background, location_background_picture):
+    def __init__(self, background):
         self.background_picture = pygame.image.load(background).convert_alpha()
-        self.location_background_picture = location_background_picture
+        self.background_picture = pygame.transform.scale(self.background_picture, (SPRITE_SIZE, SPRITE_SIZE))
 
 
 class BackgroundColor:
@@ -36,8 +36,7 @@ class BackgroundColor:
 
 
 class Level:
-    """Classe permettant de créer un niveau"""
-
+    """Class to create a level"""
     def __init__(self, file):
         self.file = file
         self.structure = 0
@@ -63,12 +62,9 @@ class Level:
             self.structure = level_structure
             return level_structure
 
-    def display_decor(self, window, item_arrive):
+    def display_decor(self, window, item_arrive, item_structure):
         """Method for displaying the level in function
         of the structure list returned by generate()"""
-        # Loading images
-        wall = pygame.image.load(image_mur).convert()
-
         # We browse the level list
         line_number = 0
         for line in self.structure:
@@ -76,14 +72,11 @@ class Level:
             case_number = 0
             for sprite in line:
                 # We calculate the actual position in pixels
-                x = case_number * sprite_size
-                y = line_number * sprite_size
+                x = case_number * SPRITE_SIZE
+                y = line_number * SPRITE_SIZE
                 if sprite == 'm':  # m = wall
-                    window.blit(wall, (x, y))
-                # elif sprite == 'd':  # d = start
-                    # character_location = [x, y]
-                    # window.blit(character.picture, (x, y))
-                elif sprite == 'g':  # a = arrive
+                    window.blit(item_structure.background_picture, (x, y))
+                elif sprite == 'g':  # g = guardian
                     window.blit(item_arrive.picture, (x, y))
                 case_number += 1
             line_number += 1
@@ -95,8 +88,8 @@ class Level:
             case_number = 0
             for sprite in line:
                 # We calculate the actual position in pixels
-                x = case_number * sprite_size
-                y = line_number * sprite_size
+                x = case_number * SPRITE_SIZE
+                y = line_number * SPRITE_SIZE
                 if sprite == 's':  # d = start
                     location_character = [x, y]
                 if sprite == "e":
