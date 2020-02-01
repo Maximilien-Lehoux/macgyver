@@ -29,7 +29,7 @@ class Items:
         """Objects are placed randomly in the maze"""
         number_line = 1
         number_column = 1
-        while level_structure[number_line][number_column] == 'm' \
+        while level_structure[number_line][number_column] == 'w' \
                 or level_structure[number_line][number_column] == 'd'\
                 or level_structure[number_line][number_column] == 'a'\
                 or level_structure[number_line][number_column] == 'g':
@@ -54,7 +54,7 @@ class Characters:
         if character.rectangle[0] != window_width - SPRITE_SIZE:
             macgyver_location_maze[0] = int((character.rectangle[0] + SPRITE_SIZE) / SPRITE_SIZE)
             macgyver_location_maze[1] = int((character.rectangle[1]) / SPRITE_SIZE)
-            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'm':
+            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'w':
                 character.rectangle = character.rectangle.move(SPRITE_SIZE, 0)
 
     def movement_left(self, character, level_structure):
@@ -62,7 +62,7 @@ class Characters:
         if character.rectangle[0] != 0:
             macgyver_location_maze[0] = int((character.rectangle[0] - SPRITE_SIZE) / SPRITE_SIZE)
             macgyver_location_maze[1] = int((character.rectangle[1]) / SPRITE_SIZE)
-            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'm':
+            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'w':
                 character.rectangle = character.rectangle.move(-SPRITE_SIZE, 0)
 
     def movement_up(self, character, level_structure):
@@ -70,7 +70,7 @@ class Characters:
         if character.rectangle[1] != 0:
             macgyver_location_maze[0] = int((character.rectangle[0]) / SPRITE_SIZE)
             macgyver_location_maze[1] = int((character.rectangle[1] - SPRITE_SIZE) / SPRITE_SIZE)
-            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'm':
+            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'w':
                 character.rectangle = character.rectangle.move(0, -SPRITE_SIZE)
 
     def movement_down(self, character, level_structure):
@@ -78,7 +78,7 @@ class Characters:
         if character.rectangle[1] != window_width - SPRITE_SIZE:
             macgyver_location_maze[0] = int((character.rectangle[0]) / SPRITE_SIZE)
             macgyver_location_maze[1] = int((character.rectangle[1] + SPRITE_SIZE) / SPRITE_SIZE)
-            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'm':
+            if level_structure[macgyver_location_maze[1]][macgyver_location_maze[0]] != 'w':
                 character.rectangle = character.rectangle.move(0, SPRITE_SIZE)
 
     def catch_object(self, character, object, location_score):

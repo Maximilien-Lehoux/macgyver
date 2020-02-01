@@ -74,7 +74,7 @@ class Level:
                 # We calculate the actual position in pixels
                 x = case_number * SPRITE_SIZE
                 y = line_number * SPRITE_SIZE
-                if sprite == 'm':  # m = wall
+                if sprite == 'w':  # m = wall
                     window.blit(item_structure.background_picture, (x, y))
                 elif sprite == 'g':  # g = guardian
                     window.blit(item_arrive.picture, (x, y))
