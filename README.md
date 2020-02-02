@@ -11,7 +11,7 @@ You can edit multiple items by the level file :
     - "s" represents Macgyver's start.
 
     - "g" represents guardian's location.
-    
+
     - "e" represents the end of the game
 
 You can change the sprite size in "structure.py"
